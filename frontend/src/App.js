@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import "./App.css";
 import contractAddresses from "./contracts/addresses.json";
-import { useAccount, useWalletClient } from 'wagmi';
+import { useAccount, useWalletClient } from "wagmi";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -51,7 +51,7 @@ function App() {
       const signer = provider.getSigner(account.address);
       setSigner(signer);
     } else {
-        setSigner(null);
+      setSigner(null);
     }
   }, [walletClient]);
 
@@ -88,7 +88,6 @@ function App() {
         lottery.hasClaimed(userAddress),
       ]);
 
-
       setLotteryData({
         totalTickets: totalTickets.toNumber(),
         interestPool: formatPyusd(interestPool),
@@ -122,15 +121,14 @@ function App() {
         const owner = await lottery.owner();
         setIsOwner(owner.toLowerCase() === address.toLowerCase());
       } else {
-          setLotteryContract(null);
-          setPyusdContract(null);
-          setIsOwner(false);
+        setLotteryContract(null);
+        setPyusdContract(null);
+        setIsOwner(false);
       }
     };
 
     setupContracts();
   }, [isConnected, signer, address]);
-
 
   useEffect(() => {
     if (address && lotteryContract && pyusdContract) {
@@ -142,7 +140,8 @@ function App() {
       const drawCompletedFilter = lotteryContract.filters.DrawCompleted();
       const fundsClaimedFilter = lotteryContract.filters.FundsClaimed();
 
-      const refresh = () => refreshLotteryData(lotteryContract, pyusdContract, address);
+      const refresh = () =>
+        refreshLotteryData(lotteryContract, pyusdContract, address);
 
       lotteryContract.on(ticketsPurchasedFilter, refresh);
       lotteryContract.on(interestAddedFilter, refresh);
@@ -158,11 +157,14 @@ function App() {
     }
   }, [address, lotteryContract, pyusdContract]);
 
-
   // Render different pages based on state
   const renderPage = () => {
     if (!isConnected) {
-        return <div className="center-message">Please connect your wallet to use the application.</div>
+      return (
+        <div className="center-message">
+          Please connect your wallet to use the application.
+        </div>
+      );
     }
     switch (page) {
       case "buy":
@@ -216,7 +218,7 @@ function App() {
         setPage={setPage}
         isOwner={isOwner}
         pyusdBalance={lotteryData.pyusdBalance}
-      />  
+      />
       <div className="container">{renderPage()}</div>
     </div>
   );
