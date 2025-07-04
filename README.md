@@ -122,13 +122,14 @@ PRIVATE_KEY=your_wallet_private_key
 SEPOLIA_RPC_URL=your_sepolia_rpc_url
 ```
 
-no need to deploy smart contracts it is already deployed here address
+#### NO need to deploy smart contracts it is already deployed here address
 on sepolia testnet
+```
 {
   "ZeroLossLottery": "0xe4fe270fab11e8d1fa99B7b8EF907c6760c72B23",
   "PYUSD": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 }
-
+```
 
 ### Running the Frontend
 
